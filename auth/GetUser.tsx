@@ -15,9 +15,7 @@ const GetUser = () => {
     <div>
       <div></div>
       <div>
-        <button onClick={() => getUser("/api/user-edge")}>
-          Fetch User Edge ⚡
-        </button>
+        <button onClick={() => getUser("/api/user")}>Fetch User Edge ⚡</button>
         <p>{timeTaken}</p>
       </div>
     </div>
