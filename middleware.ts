@@ -22,6 +22,7 @@ export default withClerkMiddleware((request: NextRequest) => {
     // redirect the users to /pages/sign-in/[[...index]].ts
 
     const signInUrl = new URL("/sign-in", request.url)
+    console.log(signInUrl)
     signInUrl.searchParams.set("redirect_url", request.url)
     return NextResponse.redirect(signInUrl)
   }
@@ -30,16 +31,5 @@ export default withClerkMiddleware((request: NextRequest) => {
 
 // Stop Middleware running on static files and public folder
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next
-     * - static (static files)
-     * - favicon.ico (favicon file)
-     * - public folder
-     * - public folder
-     */
-    "/((?!static|.*\\..*|_next|favicon.ico).*)",
-    "/",
-  ],
+  matcher: ["/((?!static|.*\\..*|_next|favicon.ico).*)", "/"],
 }

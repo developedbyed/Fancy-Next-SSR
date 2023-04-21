@@ -3,19 +3,23 @@ import { useState } from "react"
 
 const GetUser = () => {
   const [timeTaken, setTimeTaken] = useState(null)
-  const getUser = async () => {
-    const res = await fetch("/api/user")
+  const getUser = async (url: string) => {
+    const res = await fetch(url)
     const data = await res.json()
     if (data.timeTaken) {
       setTimeTaken(data.timeTaken)
     }
+    console.log(data)
   }
   return (
     <div>
-      <button onClick={getUser} className="bg-blue-700 text-lg">
-        Fetch User
-      </button>
-      <p>{timeTaken}</p>
+      <div></div>
+      <div>
+        <button onClick={() => getUser("/api/user-edge")}>
+          Fetch User Edge ⚡
+        </button>
+        <p>{timeTaken}</p>
+      </div>
     </div>
   )
 }
