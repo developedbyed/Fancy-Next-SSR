@@ -3,7 +3,13 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
 // Set the paths that don't require the user to be signed in
-const publicPaths = ["/", "/sign-in*", "/sign-up*"]
+const publicPaths = [
+  "/",
+  "/sign-in*",
+  "/sign-up*",
+  "/api/get-feed",
+  "/api/clerk-webhooks",
+]
 
 const isPublic = (path: string) => {
   return publicPaths.find((x) =>
@@ -22,7 +28,6 @@ export default withClerkMiddleware((request: NextRequest) => {
     // redirect the users to /pages/sign-in/[[...index]].ts
 
     const signInUrl = new URL("/sign-in", request.url)
-    console.log(signInUrl)
     signInUrl.searchParams.set("redirect_url", request.url)
     return NextResponse.redirect(signInUrl)
   }

@@ -1,5 +1,6 @@
 import "./globals.css"
 import { ClerkProvider } from "@clerk/nextjs/app-beta"
+import Providers from "./providers"
 import Header from "./header"
 
 export const metadata = {
@@ -14,12 +15,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ClerkProvider>
-        <body className="mx-12 lg:mx-64">
-          <Header />
-          {children}
-        </body>
-      </ClerkProvider>
+      <Providers>
+        <ClerkProvider>
+          <body className="mx-12 lg:mx-96">
+            <Header />
+            {children}
+          </body>
+        </ClerkProvider>
+      </Providers>
     </html>
   )
 }

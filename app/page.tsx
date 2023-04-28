@@ -1,10 +1,28 @@
-import GetUser from "@/auth/GetUser"
+import getQueryClient from "./getQueryClient"
+import Hydrate from "./QueryHydrate"
+import { dehydrate } from "@tanstack/query-core"
+import { prisma } from "../prisma/client"
 
-export default function Home() {
+import Posts from "@/components/Posts"
+import PostForm from "@/components/PostForm"
+
+export default async function Home() {
+  const queryClient = getQueryClient()
+  await queryClient.prefetchQuery(["posts"], async () => {
+    const posts = await prisma.post.findMany({
+      include: { author: true },
+      orderBy: { createdAt: "asc" },
+    })
+    return posts
+  })
+  const dehydratedState = dehydrate(queryClient)
+
   return (
     <main>
-      <h1>Clerk</h1>
-      <GetUser />
+      <Hydrate state={dehydratedState}>
+        <PostForm />
+        <Posts />
+      </Hydrate>
     </main>
   )
 }
