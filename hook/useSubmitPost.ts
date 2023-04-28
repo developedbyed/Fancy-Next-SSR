@@ -29,7 +29,7 @@ const useSubmitPost = () => {
       queryClient.setQueryData(["posts"], (old: any) => [...old, newPost])
       //Promise wait 250 ms
       console.log("Waiting 3 seconds in mutate" + "⏳")
-      // await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 5000))
       return { previousPosts }
     },
     onError: async (err, newPost, context: any) => {
@@ -39,7 +39,7 @@ const useSubmitPost = () => {
     onSuccess: async (data, newPost) => {
       console.log("Waiting 3 seconds in success" + "👍")
 
-      // await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 5000))
 
       //loop over all the queries and update the cache with the new id
       console.log(data.post, data.user)
@@ -58,7 +58,7 @@ const useSubmitPost = () => {
     },
     onSettled: async (data, error, variables, context) => {
       console.log("Waiting 3 seconds in settle" + "✅")
-      // await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 5000))
       queryClient.invalidateQueries(["posts"])
     },
   })
