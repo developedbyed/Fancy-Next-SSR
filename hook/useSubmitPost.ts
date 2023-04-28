@@ -29,12 +29,13 @@ const useSubmitPost = () => {
       queryClient.setQueryData(["posts"], (old: any) => [...old, newPost])
       //Promise wait 250 ms
       await new Promise((resolve) => setTimeout(resolve, 350))
-      return { previousPosts }
+      return { previousPosts, newPost }
     },
     onError: (err, newPost, context: any) => {
       queryClient.setQueryData(["posts"], context.previousPosts)
     },
     onSettled(data, error, variables, context) {
+      console.log(data + "Data on settled")
       queryClient.invalidateQueries(["posts"])
     },
   })
