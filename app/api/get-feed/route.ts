@@ -7,11 +7,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
     const end = performance.now()
     const timeTaken = end - start
 
-    // //Delete all post
-
     const posts = await prisma.post.findMany({
       include: { author: true },
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: "asc" },
     })
     // retrieve data from your database
     return NextResponse.json(posts)

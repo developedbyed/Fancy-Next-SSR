@@ -20,6 +20,7 @@ const PostForm = () => {
       author: {
         name: user?.fullName,
         profile_image_url: user?.profileImageUrl,
+        id: user?.id,
       },
       id: crypto.randomUUID(),
       layoutId: crypto.randomUUID(),

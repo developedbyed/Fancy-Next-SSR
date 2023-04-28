@@ -11,7 +11,7 @@ const useSubmitPost = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ content, layoutId }),
+        body: JSON.stringify({ content, layoutId, author }),
       })
 
       const data = await res.json()
@@ -23,19 +23,42 @@ const useSubmitPost = () => {
       return data
     },
     onMutate: async (newPost) => {
-      console.log(newPost)
+      console.log(newPost + "Mutate 🤔")
       await queryClient.cancelQueries(["posts"])
       const previousPosts = queryClient.getQueryData(["posts"])
       queryClient.setQueryData(["posts"], (old: any) => [...old, newPost])
       //Promise wait 250 ms
-      await new Promise((resolve) => setTimeout(resolve, 350))
-      return { previousPosts, newPost }
+      console.log("Waiting 3 seconds in mutate" + "⏳")
+      // await new Promise((resolve) => setTimeout(resolve, 1000))
+      return { previousPosts }
     },
-    onError: (err, newPost, context: any) => {
-      queryClient.setQueryData(["posts"], context.previousPosts)
+    onError: async (err, newPost, context: any) => {
+      console.log(err + "Error 👎")
+      await queryClient.setQueryData(["posts"], context.previousPosts)
     },
-    onSettled(data, error, variables, context) {
-      console.log(data + "Data on settled")
+    onSuccess: async (data, newPost) => {
+      console.log("Waiting 3 seconds in success" + "👍")
+
+      // await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      //loop over all the queries and update the cache with the new id
+      console.log(data.post, data.user)
+      queryClient.setQueryData(["posts"], (old: any) => {
+        return old.map((post: any) => {
+          if (post.id === newPost.id) {
+            return {
+              ...data.post,
+              author: { ...data.author },
+              id: data.post.id,
+            }
+          }
+          return post
+        })
+      })
+    },
+    onSettled: async (data, error, variables, context) => {
+      console.log("Waiting 3 seconds in settle" + "✅")
+      // await new Promise((resolve) => setTimeout(resolve, 1000))
       queryClient.invalidateQueries(["posts"])
     },
   })

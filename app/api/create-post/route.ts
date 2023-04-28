@@ -31,7 +31,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     }
 
     const user = userId ? await clerkClient.users.getUser(userId) : null
-
+    const { author } = body
     const post = await prisma.post.create({
       data: {
         content: body.content,
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       },
     })
     // retrieve data from your database
-    return NextResponse.json({ user, post })
+    return NextResponse.json({ user, post, author })
   } catch (error) {
     console.log(error)
     return NextResponse.json({ error: "Something went wrong ❣️" })

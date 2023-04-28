@@ -7,4 +7,5 @@ export type PostSubmit = {
 type Author = {
   name: string | null | undefined
   profile_image_url: string | null | undefined
+  id: string | null | undefined
 }
