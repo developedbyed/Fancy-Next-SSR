@@ -32,12 +32,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const user = userId ? await clerkClient.users.getUser(userId) : null
 
-    // const deleteAllPosts = await prisma.post.deleteMany({
-    //   where: {
-    //     authorId: userId,
-    //   },
-    // })
-
     const post = await prisma.post.create({
       data: {
         content: body.content,

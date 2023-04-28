@@ -2,7 +2,6 @@ import "./globals.css"
 import { ClerkProvider } from "@clerk/nextjs/app-beta"
 import Providers from "./providers"
 import Header from "./header"
-import { Analytics } from "@vercel/analytics/react"
 
 export const metadata = {
   title: "Create Next App",
@@ -21,7 +20,6 @@ export default function RootLayout({
           <body className="mx-12 lg:mx-96">
             <Header />
             {children}
-            <Analytics />
           </body>
         </ClerkProvider>
       </Providers>
