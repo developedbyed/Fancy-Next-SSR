@@ -23,10 +23,9 @@ const useSubmitPost = () => {
       return data
     },
     onMutate: async (newPost) => {
-      console.log(newPost + "Mutate 🤔")
       await queryClient.cancelQueries(["posts"])
       const previousPosts = queryClient.getQueryData(["posts"])
-      console.log("previous Posts from cache" + JSON.stringify(previousPosts))
+
       queryClient.setQueryData(["posts"], (old: any) => [...old, newPost])
       //Set Delay
       await new Promise((resolve) => setTimeout(resolve, 300))
@@ -53,7 +52,6 @@ const useSubmitPost = () => {
       })
     },
     onSettled: async (data, error, variables, context) => {
-      console.log("Waiting 3 seconds in settle" + "✅")
       queryClient.invalidateQueries(["posts"])
     },
   })

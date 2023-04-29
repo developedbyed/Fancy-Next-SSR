@@ -1,25 +1,22 @@
 export const runtime = "edge"
 
 import { NextResponse } from "next/server"
-import { PrismaClient } from "@prisma/client"
-import useAccelerate from "@prisma/extension-accelerate"
-
-const prisma = new PrismaClient().$extends(useAccelerate)
+import { prisma } from "@/prisma/client"
 
 export async function GET(req: Request) {
   const startTime = Date.now()
   try {
-    const posts = await prisma.post
+    const { data, info } = await prisma.post
       .findMany({
         include: { author: true },
         orderBy: { createdAt: "asc" },
-        cacheStrategy: { swr: 2, ttl: 2 },
+        cacheStrategy: { swr: 2, ttl: 3 },
       })
       .withAccelerateInfo()
-
+    console.log("Accelerate info:", info)
     console.log("Request took:", Date.now() - startTime, "ms")
 
-    return NextResponse.json(posts)
+    return NextResponse.json(data)
   } catch (error) {
     console.log(error)
     return NextResponse.json({ error: "Something went wrong ❣️" })
