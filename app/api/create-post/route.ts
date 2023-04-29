@@ -3,8 +3,6 @@ import { getAuth, clerkClient } from "@clerk/nextjs/server"
 import { prisma } from "../../../prisma/client"
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  const start = performance.now()
-
   try {
     const { userId } = getAuth(req)
     //Throw error if not logged

@@ -3,12 +3,12 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["clientExtensions"]
+  previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("ACCELERATE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model Post {
