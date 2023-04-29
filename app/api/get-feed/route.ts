@@ -1,8 +1,10 @@
-export const revalidate = 0
 export const runtime = "edge"
 
 import { NextResponse } from "next/server"
-import { prisma } from "../../../prisma/client"
+import { PrismaClient } from "@prisma/client"
+import useAccelerate from "@prisma/extension-accelerate"
+
+const prisma = new PrismaClient().$extends(useAccelerate)
 
 export async function GET(req: Request) {
   const startTime = Date.now()
@@ -11,7 +13,7 @@ export async function GET(req: Request) {
       .findMany({
         include: { author: true },
         orderBy: { createdAt: "asc" },
-        cacheStrategy: { swr: 1, ttl: 1 },
+        cacheStrategy: { swr: 2, ttl: 2 },
       })
       .withAccelerateInfo()
 
