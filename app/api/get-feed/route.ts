@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { prisma } from "../../../prisma/client"
 
-export const revalidate = 0
+// export const revalidate = 0
 export const runtime = "edge"
 
 export async function GET(req: Request) {
