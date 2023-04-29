@@ -8,7 +8,7 @@ const Posts = () => {
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Something went wrong 😅</div>
-  console.log(data + "data from posts")
+
   return (
     <motion.div className="my-12 flex  flex-col-reverse">
       <AnimatePresence>
