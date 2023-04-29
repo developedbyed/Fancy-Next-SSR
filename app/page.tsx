@@ -6,6 +6,8 @@ import { prisma } from "../prisma/client"
 import Posts from "@/components/Posts"
 import PostForm from "@/components/PostForm"
 
+export const revalidate = 0
+
 export default async function Home() {
   const queryClient = getQueryClient()
   await queryClient.prefetchQuery(["posts"], async () => {
