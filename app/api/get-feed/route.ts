@@ -1,7 +1,9 @@
-import { NextResponse, NextRequest } from "next/server"
+import { NextResponse } from "next/server"
 import { prisma } from "../../../prisma/client"
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export const revalidate = 0
+
+export async function GET(req: Request) {
   const start = performance.now()
   try {
     const end = performance.now()
