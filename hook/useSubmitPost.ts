@@ -26,8 +26,11 @@ const useSubmitPost = () => {
       console.log(newPost + "Mutate 🤔")
       await queryClient.cancelQueries(["posts"])
       const previousPosts = queryClient.getQueryData(["posts"])
+      console.log("previous Posts from cache" + JSON.stringify(previousPosts))
       queryClient.setQueryData(["posts"], (old: any) => [...old, newPost])
       //Promise wait 250 ms
+      const newData = queryClient.getQueryData(["posts"])
+      console.log("new Posts from cache" + JSON.stringify(newData))
       console.log("Waiting 3 seconds in mutate" + "⏳")
       await new Promise((resolve) => setTimeout(resolve, 5000))
       return { previousPosts }
