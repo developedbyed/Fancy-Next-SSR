@@ -1,10 +1,10 @@
 import { NextResponse, NextRequest } from "next/server"
-import { getAuth, clerkClient } from "@clerk/nextjs/server"
+import { auth } from "@clerk/nextjs/app-beta"
 import { prisma } from "../../../prisma/client"
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
-    const { userId } = getAuth(req)
+    const { userId, user } = auth()
     //Throw error if not logged
     if (!userId) {
       NextResponse.json({ error: "Please log in to post ❣️" }, { status: 401 })
@@ -24,11 +24,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (body.content.length < 1) {
       return NextResponse.json(
         { error: "Please post a longer message 🙏" },
-        { status: 401 }
+        { status: 403 }
       )
     }
 
-    const user = userId ? await clerkClient.users.getUser(userId) : null
     const { author } = body
     const post = await prisma.post.create({
       data: {

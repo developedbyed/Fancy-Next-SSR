@@ -32,7 +32,6 @@ const PostForm = () => {
 
     if (mutation.isError) {
       const error = mutation.error as Error
-      console.log(error)
       setPostError(error.message)
       setIsShaking(true)
       timeout = setTimeout(() => {

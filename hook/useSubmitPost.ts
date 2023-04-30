@@ -52,7 +52,7 @@ const useSubmitPost = () => {
       })
     },
     onSettled: async (data, error, variables, context) => {
-      queryClient.invalidateQueries(["posts"])
+      // queryClient.invalidateQueries(["posts"])
     },
   })
   return mutation
