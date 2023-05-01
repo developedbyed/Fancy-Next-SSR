@@ -7,7 +7,7 @@ export async function GET(req: Request) {
       include: { author: true },
       orderBy: { createdAt: "asc" },
     })
-
+    console.log("fetched!")
     return NextResponse.json(posts)
   } catch (error) {
     return NextResponse.json({ error: "Something went wrong ❣️" })
