@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server"
-import { PrismaClient } from "@prisma/client/edge"
-import useAccelerate from "@prisma/extension-accelerate"
-
-const prisma = new PrismaClient().$extends(useAccelerate)
+import { prisma } from "../../../prisma/client"
 
 export const runtime = "edge"
 
