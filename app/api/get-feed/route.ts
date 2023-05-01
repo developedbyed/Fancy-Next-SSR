@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     const posts = await prisma.post.findMany({
       include: { author: true },
       orderBy: { createdAt: "asc" },
-      cacheStrategy: { swr: 5 },
+      cacheStrategy: { swr: 5, ttl: 3 },
     })
 
     return NextResponse.json(posts)
