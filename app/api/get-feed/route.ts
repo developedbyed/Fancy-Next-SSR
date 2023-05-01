@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { prisma } from "../../../prisma/client"
 
 export const runtime = "edge"
+export const preferredRegion = "sfo1"
 
 export async function GET(req: Request) {
   try {
