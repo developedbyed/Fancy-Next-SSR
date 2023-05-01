@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <ClerkProvider>
+    <ClerkProvider>
+      <html lang="en">
         <Providers>
           <ReactQueryDevtools />
           <body className="mx-12 lg:mx-96 bg-black-100 text-white">
@@ -24,7 +24,7 @@ export default function RootLayout({
             {children}
           </body>
         </Providers>
-      </ClerkProvider>
-    </html>
+      </html>
+    </ClerkProvider>
   )
 }

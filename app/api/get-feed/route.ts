@@ -1,5 +1,11 @@
 import { NextResponse } from "next/server"
-import { prisma } from "../../../prisma/client"
+// import { prisma } from "../../../prisma/client"
+import { PrismaClient } from "@prisma/client/edge"
+
+export const runtime = "edge"
+export const preferredRegion = "sfo"
+
+const prisma = new PrismaClient()
 
 export async function GET(req: Request) {
   try {

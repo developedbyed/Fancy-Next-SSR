@@ -70,18 +70,17 @@ const PostForm = () => {
         rows={3}
         maxLength={300}
       />
-      {content.length > 0 && (
-        <div className="flex justify-end">
-          <motion.button
-            animate={{ opacity: 1, x: 0 }}
-            initial={{ opacity: 0, x: -25 }}
-            className="mt-2"
-            type="submit"
-          >
-            <IoSendSharp className="text-lg"></IoSendSharp>
-          </motion.button>
-        </div>
-      )}
+
+      <div className="flex justify-end">
+        <motion.button
+          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: -25 }}
+          className="mt-2"
+          type="submit"
+        >
+          <IoSendSharp className="text-lg"></IoSendSharp>
+        </motion.button>
+      </div>
     </motion.form>
   )
 }
