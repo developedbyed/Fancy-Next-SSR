@@ -1,17 +1,14 @@
 import { NextResponse } from "next/server"
-// import { prisma } from "../../../prisma/client"
-import { PrismaClient } from "@prisma/client/edge"
+import prisma from "../../../prisma/client"
 
 export const runtime = "edge"
-export const preferredRegion = "sfo"
-
-const prisma = new PrismaClient()
 
 export async function GET(req: Request) {
   try {
     const posts = await prisma.post.findMany({
       include: { author: true },
       orderBy: { createdAt: "asc" },
+      cacheStrategy: { swr: 5 },
     })
 
     return NextResponse.json(posts)
