@@ -54,7 +54,7 @@ const PostForm = () => {
     <motion.form
       animate={isShaking ? "shake" : "initial"}
       variants={shakeAnimation}
-      className="bg-slate-800 p-8 relative rounded-lg"
+      className="relative rounded-lg"
       onSubmit={(e) => {
         e.preventDefault()
         submitPost()
@@ -63,25 +63,25 @@ const PostForm = () => {
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        className={`resize-none rounded-lg p-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-slate-800 w-full transition-colors duration-200 ease-in border-2 border-transparent focus:border-blue-600 ${
+        className={`resize-none rounded-lg p-6 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-black-200 w-full  border-transparent  ${
           postError && "placeholder-red-500"
         } `}
         placeholder={postError ? postError : "What's on your mind?"}
         rows={3}
         maxLength={300}
       />
-      <div className="flex justify-end">
-        <motion.button
-          className="mt-2 "
-          initial={{ opacity: 1, x: 0 }}
-          animate={
-            mutation.isLoading ? { opacity: 0, x: 20 } : { opacity: 1, x: 0 }
-          }
-          type="submit"
-        >
-          <IoSendSharp className="text-lg"></IoSendSharp>
-        </motion.button>
-      </div>
+      {content.length > 0 && (
+        <div className="flex justify-end">
+          <motion.button
+            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -25 }}
+            className="mt-2"
+            type="submit"
+          >
+            <IoSendSharp className="text-lg"></IoSendSharp>
+          </motion.button>
+        </div>
+      )}
     </motion.form>
   )
 }

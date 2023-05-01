@@ -12,8 +12,8 @@ const Posts = () => {
   return (
     <motion.div className="my-12 flex  flex-col-reverse">
       <AnimatePresence>
-        {data?.map((post, index) => (
-          <Post post={post} index={index} key={post.layoutId} />
+        {data?.map((post) => (
+          <Post post={post} key={post.layoutId} />
         ))}
       </AnimatePresence>
     </motion.div>

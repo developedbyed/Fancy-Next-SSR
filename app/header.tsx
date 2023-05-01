@@ -8,10 +8,9 @@ function Header() {
     <header>
       <nav className="flex justify-between items-center py-12">
         <Link href="/">
-          <h1>Clerk edge ⚡</h1>
+          <h1>Buzz ⚡</h1>
         </Link>
         <ul className="flex items-center gap-12">
-          <Link href="/dashboard">courses</Link>
           <SignedIn>
             <UserButton />
           </SignedIn>

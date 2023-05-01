@@ -19,7 +19,7 @@ export default function RootLayout({
       <ClerkProvider>
         <Providers>
           <ReactQueryDevtools />
-          <body className="mx-12 lg:mx-96">
+          <body className="mx-12 lg:mx-96 bg-black-100 text-white">
             <Header />
             {children}
           </body>
