@@ -39,7 +39,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     // retrieve data from your database
     return NextResponse.json({ user, post, author })
   } catch (error) {
-    console.log(error)
     return NextResponse.json({ error: "Something went wrong ❣️" })
   }
 }
