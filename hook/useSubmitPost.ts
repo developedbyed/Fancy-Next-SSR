@@ -3,9 +3,8 @@ import { PostSubmit } from "@/types/PostSubmit"
 
 const useSubmitPost = () => {
   const queryClient = useQueryClient()
-
   const mutation = useMutation({
-    mutationFn: async ({ content, author, layoutId, id }: PostSubmit) => {
+    mutationFn: async ({ content, author, layoutId }: PostSubmit) => {
       const res = await fetch("/api/create-post", {
         method: "POST",
         headers: {
@@ -34,22 +33,6 @@ const useSubmitPost = () => {
     onError: async (err, newPost, context: any) => {
       console.log(err + "Error 👎")
       await queryClient.setQueryData(["posts"], context.previousPosts)
-    },
-    onSuccess: async (data, newPost) => {
-      //loop over all the queries and update the cache with the new id
-
-      queryClient.setQueryData(["posts"], (old: any) => {
-        return old.map((post: any) => {
-          if (post.id === newPost.id) {
-            return {
-              ...data.post,
-              author: { ...data.author },
-              id: data.post.id,
-            }
-          }
-          return post
-        })
-      })
     },
     onSettled: async (data, error, variables, context) => {
       queryClient.invalidateQueries(["posts"])
