@@ -10,7 +10,7 @@ const Posts = () => {
   if (error) return <div>Something went wrong 😅</div>
 
   return (
-    <motion.div className="my-12 flex  flex-col-reverse">
+    <motion.div className="my-6 flex  flex-col-reverse">
       <AnimatePresence>
         {data?.map((post) => (
           <Post post={post} key={post.layoutId} />
