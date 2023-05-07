@@ -1,12 +1,9 @@
 "use client"
-import { SignInButton, useUser } from "@clerk/nextjs"
+import { SignInButton, useUser, UserButton } from "@clerk/nextjs"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import Image from "next/image"
 
 function Header() {
-  const { isLoaded, isSignedIn, user } = useUser()
-  console.log(isLoaded)
+  const { isSignedIn } = useUser()
 
   return (
     <header>
@@ -15,21 +12,7 @@ function Header() {
           <h1>Buzz ⚡</h1>
         </Link>
         <ul className="flex items-center gap-12">
-          {isSignedIn && (
-            <motion.div
-              animate={{ scale: 1, opacity: 1 }}
-              initial={{ scale: 0.5, opacity: 0 }}
-            >
-              <Image
-                alt="profile"
-                src={user.profileImageUrl}
-                width={32}
-                height={32}
-                className="rounded-full"
-              />
-            </motion.div>
-          )}
-
+          {isSignedIn && <UserButton />}
           {!isSignedIn && (
             <SignInButton mode="modal">
               <button>Sign In</button>

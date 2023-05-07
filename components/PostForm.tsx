@@ -19,6 +19,7 @@ const PostForm = () => {
         profile_image_url: user?.profileImageUrl,
         id: user?.id,
       },
+      likes: [],
       id: crypto.randomUUID(),
       layoutId: crypto.randomUUID(),
     })

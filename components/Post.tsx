@@ -2,6 +2,7 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { PostsType } from "@/types/PostsType"
+import Like from "../components/Like"
 
 const Post = ({ post }: { post: PostsType }) => {
   return (
@@ -12,7 +13,7 @@ const Post = ({ post }: { post: PostsType }) => {
       className="p-6 bg-black-200 rounded-lg my-3"
       layoutId={post.layoutId}
     >
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 mb-4">
         <Image
           src={post.author.profile_image_url}
           width={48}
@@ -27,6 +28,7 @@ const Post = ({ post }: { post: PostsType }) => {
           <h1 className="font-medium">{post.content}</h1>
         </div>
       </div>
+      <Like post={post} />
     </motion.div>
   )
 }

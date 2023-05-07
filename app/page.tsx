@@ -10,7 +10,7 @@ export default async function Home() {
   const queryClient = getQueryClient()
   await queryClient.prefetchQuery(["posts"], async () => {
     const posts = await prisma.post.findMany({
-      include: { author: true },
+      include: { author: true, likes: true },
       orderBy: { createdAt: "asc" },
     })
     return posts

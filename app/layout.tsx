@@ -15,14 +15,14 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <Providers>
-          <body className="mx-12 lg:mx-96 bg-black-100 text-white">
+      <Providers>
+        <html lang="en">
+          <body className="mx-6 lg:mx-96 bg-black-100 text-white">
             <Header />
             {children}
           </body>
-        </Providers>
-      </html>
+        </html>
+      </Providers>
     </ClerkProvider>
   )
 }
